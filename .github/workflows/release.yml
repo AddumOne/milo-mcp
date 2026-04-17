@@ -52,7 +52,7 @@ jobs:
       # --provenance attaches a signed build attestation to the release.
       # --ignore-scripts suppresses the prepack hook (build already ran above).
       - name: Publish to npm
-        run: npm publish --provenance --ignore-scripts
+        run: npm publish --provenance --access public --ignore-scripts
 
       # Create the GitHub Release and attach the bundle.
       # --generate-notes auto-fills release notes from PR titles / commits.

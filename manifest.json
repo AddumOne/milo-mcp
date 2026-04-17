@@ -41,23 +41,6 @@
       "sensitive": true
     }
   },
-  "permissions": {
-    "network": {
-      "domains": [
-        "api.github.com",
-        "api.anthropic.com",
-        "huggingface.co"
-      ]
-    },
-    "filesystem": {
-      "read": [
-        "${__dirname}"
-      ],
-      "write": [
-        "${__dirname}/.cache"
-      ]
-    }
-  },
   "compatibility": {
     "claude_desktop": ">=0.10.0",
     "platforms": [

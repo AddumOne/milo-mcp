@@ -44,6 +44,8 @@ Two distribution channels. Pick whichever fits your client.
 
 Download the latest `*.mcpb` file from the [Releases page](https://github.com/AddumOne/milo-mcp/releases) and double-click it. Claude Desktop opens an install dialog; fill in your `GITHUB_TOKEN` and optionally `ANTHROPIC_API_KEY`, then click Install. No local Node install needed — Claude Desktop ships its own runtime and the embedding model is pre-bundled in the file.
 
+To uninstall, open Claude Desktop → Settings → Extensions, find milo-mcp, and click Remove.
+
 ### Any MCP client — npm package
 
 Published as [`@addumone/milo-mcp`](https://www.npmjs.com/package/@addumone/milo-mcp) on the public npm registry. Configure your MCP client to invoke it via `npx`:

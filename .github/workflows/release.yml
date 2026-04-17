@@ -6,6 +6,7 @@ on:
 
 permissions:
   contents: write
+  id-token: write
 
 jobs:
   release:
@@ -18,7 +19,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-          registry-url: 'https://registry.npmjs.org'
 
       - run: npm ci
       - run: npm run build
@@ -47,12 +47,12 @@ jobs:
       - name: Pack MCPB bundle
         run: npm run pack:mcpb
 
-      # Publish to public npm.
+      # Publish via OIDC Trusted Publishing — no NPM_TOKEN needed.
+      # --provenance attaches a signed build attestation.
       # --ignore-scripts suppresses the prepack hook (build already ran above).
+      # NODE_AUTH_TOKEN must not be set so npm falls back to the OIDC token.
       - name: Publish to npm
-        run: npm publish --access public --ignore-scripts
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --provenance --access public --ignore-scripts
 
       # Create the GitHub Release and attach the bundle.
       # --generate-notes auto-fills release notes from PR titles / commits.

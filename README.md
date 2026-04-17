@@ -106,7 +106,7 @@ Required:
 - `GITHUB_TOKEN` — read:repo scope (indexing + GitHub-backed tools)
 
 Optional:
-- `ANTHROPIC_API_KEY` — enables CRAG semantic validation in `search_blocks`. Without it, semantic/compositional/multi-source queries fall back to cosine-similarity ranking automatically.
+- `ANTHROPIC_API_KEY` — enables CRAG semantic validation in `search_blocks`. Without it, `search_blocks` still works but uses cosine-similarity ranking only, which produces lower-quality results. All other tools are unaffected. A warning is logged at startup when this key is not set.
 - Optional tuning (see `.env.example`; defaults in `src/config.ts`): `MILO_REPO_*`, `EMBEDDING_MODEL`, `CRAG_THRESHOLD`, `SELF_RAG_MAX_ATTEMPTS`, `COSINE_GAP` (CRAG candidate band vs top cosine score, default `0.20`).
 
 Required for write tools (Phase 3+):

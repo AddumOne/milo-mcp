@@ -34,7 +34,7 @@ import { readFstab } from './resources/fstab-reader.js';
 import { buildAllIndexes } from './index/builder.js';
 import { loadEvalResults } from './rag/evaluation/results.js';
 import { registry } from './registry.js';
-import { CUSTOM_PROJECTS_PATH } from './config.js';
+import { CUSTOM_PROJECTS_PATH, config } from './config.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -623,6 +623,14 @@ async function main() {
 
   // Load custom projects before building the index
   registry.loadCustom(CUSTOM_PROJECTS_PATH);
+
+  if (!config.anthropicApiKey) {
+    process.stderr.write(
+      '[milo-mcp] WARNING: ANTHROPIC_API_KEY is not set. search_blocks will use ' +
+      'cosine similarity only — search quality will be lower. Set ANTHROPIC_API_KEY ' +
+      'to enable CRAG semantic validation for better results.\n',
+    );
+  }
 
   // Build block index in the background on startup
   buildAllIndexes().catch((err) => {

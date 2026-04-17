@@ -2,7 +2,7 @@
   "dxt_version": "0.1",
   "name": "milo-mcp",
   "display_name": "Adobe Milo MCP",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "description": "Milo/EDS block discovery, ownership, and semantic search for Claude Desktop",
   "author": {
     "name": "Adam Baker",

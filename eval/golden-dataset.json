@@ -1,0 +1,37 @@
+{
+  "queries": [
+    { "query": "get the accordion block", "type": "LOOKUP", "expected_blocks": ["accordion"] },
+    { "query": "show me the aside block", "type": "LOOKUP", "expected_blocks": ["aside"] },
+    { "query": "fetch the carousel block", "type": "LOOKUP", "expected_blocks": ["carousel"] },
+    { "query": "get the marquee block", "type": "LOOKUP", "expected_blocks": ["marquee"] },
+    { "query": "show the chart block", "type": "LOOKUP", "expected_blocks": ["chart"] },
+    { "query": "get the tabs block", "type": "LOOKUP", "expected_blocks": ["tabs"] },
+    { "query": "fetch the modal block", "type": "LOOKUP", "expected_blocks": ["modal"] },
+    { "query": "show me the columns block", "type": "LOOKUP", "expected_blocks": ["columns"] },
+    { "query": "get the fragment block", "type": "LOOKUP", "expected_blocks": ["fragment"] },
+    { "query": "show the video block", "type": "LOOKUP", "expected_blocks": ["video"] },
+
+    { "query": "find a block for displaying promotional content", "type": "SEMANTIC", "expected_blocks": ["promo", "marquee"] },
+    { "query": "I need a block that shows expandable sections", "type": "SEMANTIC", "expected_blocks": ["accordion"] },
+    { "query": "block for rotating through multiple images", "type": "SEMANTIC", "expected_blocks": ["carousel"] },
+    { "query": "show content in side-by-side columns", "type": "SEMANTIC", "expected_blocks": ["columns"] },
+    { "query": "block that displays data charts or graphs", "type": "SEMANTIC", "expected_blocks": ["chart"] },
+    { "query": "navigation tabs for switching between content sections", "type": "SEMANTIC", "expected_blocks": ["tabs"] },
+    { "query": "show a dialog or popup overlay", "type": "SEMANTIC", "expected_blocks": ["modal"] },
+    { "query": "embed reusable content from another page", "type": "SEMANTIC", "expected_blocks": ["fragment"] },
+    { "query": "large hero banner at top of page", "type": "SEMANTIC", "expected_blocks": ["marquee"] },
+    { "query": "display a grid of content cards", "type": "SEMANTIC", "expected_blocks": ["card", "cards", "content-cards"] },
+
+    { "query": "which accordion variants exist and which child projects override it", "type": "COMPOSITIONAL", "expected_blocks": ["accordion"] },
+    { "query": "compare all carousel blocks across milo and da-bacom", "type": "COMPOSITIONAL", "expected_blocks": ["carousel"] },
+    { "query": "which blocks are stale and lag behind milo core", "type": "COMPOSITIONAL", "expected_blocks": [] },
+    { "query": "all blocks that support dark variant and override milo", "type": "COMPOSITIONAL", "expected_blocks": [] },
+    { "query": "audit which da-bacom blocks override milo and are outdated", "type": "COMPOSITIONAL", "expected_blocks": [] },
+
+    { "query": "get the xyz-nonexistent-block block", "type": "EDGE_CASE", "expected_blocks": [] },
+    { "query": "find block for thing", "type": "EDGE_CASE", "expected_blocks": [] },
+    { "query": "card", "type": "EDGE_CASE", "expected_blocks": ["card"] },
+    { "query": "get the card block", "type": "EDGE_CASE", "expected_blocks": ["card"] },
+    { "query": "find a block that does everything", "type": "EDGE_CASE", "expected_blocks": [] }
+  ]
+}

@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.cache/
+.env
+*.env.local
+resources/models/
+*.dxt
+*.mcpb
+*.tgz
+.claude/settings.local.json
+.claude/scheduled_tasks.lock

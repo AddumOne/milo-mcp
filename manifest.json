@@ -1,0 +1,49 @@
+{
+  "dxt_version": "0.1",
+  "name": "milo-mcp",
+  "display_name": "Adobe Milo MCP",
+  "version": "0.2.0",
+  "description": "Milo/EDS block discovery, ownership, and semantic search for Claude Desktop",
+  "author": {
+    "name": "Adam Baker",
+    "email": "adamb@adobe.com"
+  },
+  "license": "Apache-2.0",
+  "server": {
+    "type": "node",
+    "entry_point": "dist/server.js",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${__dirname}/dist/server.js"],
+      "env": {
+        "GITHUB_TOKEN": "${user_config.github_token}",
+        "ANTHROPIC_API_KEY": "${user_config.anthropic_api_key}",
+        "MILO_MCP_MODEL_CACHE_DIR": "${__dirname}/resources/models",
+        "MILO_MCP_OFFLINE_MODEL": "1"
+      }
+    }
+  },
+  "user_config": {
+    "github_token": {
+      "type": "string",
+      "title": "GitHub Token",
+      "description": "Personal access token with read:repo scope (for indexing adobecom repos)",
+      "required": true,
+      "sensitive": true
+    },
+    "anthropic_api_key": {
+      "type": "string",
+      "title": "Anthropic API Key",
+      "description": "Used by search_blocks for CRAG semantic validation",
+      "required": true,
+      "sensitive": true
+    }
+  },
+  "compatibility": {
+    "claude_desktop": ">=0.10.0",
+    "platforms": ["darwin", "win32"],
+    "runtimes": {
+      "node": ">=18.0.0"
+    }
+  }
+}

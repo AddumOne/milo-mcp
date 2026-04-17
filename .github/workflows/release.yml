@@ -6,6 +6,7 @@ on:
 
 permissions:
   contents: write
+  id-token: write
 
 jobs:
   release:
@@ -47,12 +48,11 @@ jobs:
       - name: Pack MCPB bundle
         run: npm run pack:mcpb
 
-      # Publish to public npm. --ignore-scripts suppresses the prepack hook
-      # (which would rebuild) since the build step above already produced dist/.
+      # Publish to public npm via OIDC Trusted Publishing — no token needed.
+      # --provenance attaches a signed build attestation to the release.
+      # --ignore-scripts suppresses the prepack hook (build already ran above).
       - name: Publish to npm
-        run: npm publish --ignore-scripts
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --provenance --ignore-scripts
 
       # Create the GitHub Release and attach the bundle.
       # --generate-notes auto-fills release notes from PR titles / commits.

@@ -36,9 +36,22 @@
     "anthropic_api_key": {
       "type": "string",
       "title": "Anthropic API Key",
-      "description": "Used by search_blocks for CRAG semantic validation",
-      "required": true,
+      "description": "Optional. Enables CRAG semantic validation in search_blocks for better results. Without it, search still works using cosine similarity.",
+      "required": false,
       "sensitive": true
+    }
+  },
+  "permissions": {
+    "network": {
+      "domains": [
+        "api.github.com",
+        "api.anthropic.com",
+        "huggingface.co"
+      ]
+    },
+    "filesystem": {
+      "read": ["${__dirname}"],
+      "write": ["${__dirname}/.cache"]
     }
   },
   "compatibility": {

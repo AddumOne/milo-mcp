@@ -42,7 +42,7 @@ Two distribution channels. Pick whichever fits your client.
 
 ### Claude Desktop — one-click bundle
 
-Download the latest `*.mcpb` file from the [Releases page](https://github.com/AddumOne/milo-mcp/releases) and double-click it. Claude Desktop opens an install dialog; fill in your `GITHUB_TOKEN` and `ANTHROPIC_API_KEY` and click Install. No local Node install needed — Claude Desktop ships its own runtime and the embedding model is pre-bundled in the file.
+Download the latest `*.mcpb` file from the [Releases page](https://github.com/AddumOne/milo-mcp/releases) and double-click it. Claude Desktop opens an install dialog; fill in your `GITHUB_TOKEN` and optionally `ANTHROPIC_API_KEY`, then click Install. No local Node install needed — Claude Desktop ships its own runtime and the embedding model is pre-bundled in the file.
 
 ### Any MCP client — npm package
 
@@ -56,7 +56,7 @@ Published as [`@addumone/milo-mcp`](https://www.npmjs.com/package/@addumone/milo
       "args": ["-y", "@addumone/milo-mcp"],
       "env": {
         "GITHUB_TOKEN": "ghp_...",
-        "ANTHROPIC_API_KEY": "sk-ant-..."
+        "ANTHROPIC_API_KEY": "sk-ant-..."  // optional — enables CRAG; omit for cosine-only search
       }
     }
   }
@@ -69,7 +69,7 @@ No `.npmrc` setup needed — the package is on the public registry. The embeddin
 
 ```bash
 cp .env.example .env
-# GITHUB_TOKEN is required; add ANTHROPIC_API_KEY if you use search_blocks
+# GITHUB_TOKEN is required; ANTHROPIC_API_KEY is optional (enables CRAG for search_blocks)
 npm install
 npm run dev
 ```
@@ -102,13 +102,12 @@ Queries are classified into four types and routed to the most appropriate techni
 
 See `.env.example` for all variables.
 
-Required for Phase 1:
+Required:
 - `GITHUB_TOKEN` — read:repo scope (indexing + GitHub-backed tools)
 
-Required for `search_blocks` (semantic / compositional / multi-source routing uses CRAG):
-- `ANTHROPIC_API_KEY`
-
-Optional tuning (see `.env.example`; defaults in `src/config.ts`): `MILO_REPO_*`, `EMBEDDING_MODEL`, `CRAG_THRESHOLD`, `SELF_RAG_MAX_ATTEMPTS`, `COSINE_GAP` (CRAG candidate band vs top cosine score, default `0.20`).
+Optional:
+- `ANTHROPIC_API_KEY` — enables CRAG semantic validation in `search_blocks`. Without it, semantic/compositional/multi-source queries fall back to cosine-similarity ranking automatically.
+- Optional tuning (see `.env.example`; defaults in `src/config.ts`): `MILO_REPO_*`, `EMBEDDING_MODEL`, `CRAG_THRESHOLD`, `SELF_RAG_MAX_ATTEMPTS`, `COSINE_GAP` (CRAG candidate band vs top cosine score, default `0.20`).
 
 Required for write tools (Phase 3+):
 - `GITHUB_WRITE_TOKEN` — repo scope

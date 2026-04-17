@@ -14,6 +14,7 @@ npm run dev         # Development mode with hot reload (tsx watch)
 npm start           # Run compiled server from dist/
 npm test            # Run all unit tests (vitest)
 npm run eval        # Run RAGAS evaluation harness (Phase 1 quality gate)
+npm run pack:mcpb   # Build Claude Desktop bundle (.mcpb) via @anthropic-ai/mcpb
 ```
 
 Run a single test file:
@@ -108,6 +109,22 @@ The server exposes three convention docs as MCP resources (in `src/resources/`):
 - `block-anatomy.md` — JS/CSS/test file structure for blocks
 - `da-table-syntax.md` — Document Authoring block table format
 - `nala-test-pattern.md` — Playwright test structure
+
+## Releasing
+
+Published to two channels:
+- **npm** (`@addumone/milo-mcp` on public npmjs.org) — consumed via `npx @addumone/milo-mcp`
+- **Claude Desktop bundle** (`.mcpb`) — attached to each GitHub Release at https://github.com/AddumOne/milo-mcp/releases
+
+To cut a release:
+```bash
+npm version patch   # or minor / major — bumps package.json + manifest.json, creates git tag
+git push && git push --tags
+```
+
+Pushing the tag triggers `.github/workflows/release.yml`, which builds, packs the bundle, publishes to npm via OIDC Trusted Publishing (no `NPM_TOKEN` secret needed), and creates the GitHub Release. The release workflow only runs when the tag is on `main`.
+
+Semver convention: `patch` for bug fixes, `minor` for new tools/params, `major` for renamed or removed tools (breaking for AI clients that reference tool names).
 
 ## Testing
 

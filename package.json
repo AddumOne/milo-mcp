@@ -7,7 +7,7 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/AddumOne/milo-mcp.git"
+    "url": "git+https://github.com/AddumOne/milo-mcp.git"
   },
   "homepage": "https://github.com/AddumOne/milo-mcp#readme",
   "bugs": "https://github.com/AddumOne/milo-mcp/issues",

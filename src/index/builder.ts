@@ -160,5 +160,13 @@ export async function buildAllIndexes(): Promise<void> {
 
   // Save to cache for next startup
   saveCache(DEFAULT_CACHE_PATH);
-  process.stderr.write(`[milo-mcp] Cached ${blockStore.size()} blocks to disk\n`);
+  const total = blockStore.size();
+  process.stderr.write(`[milo-mcp] Cached ${total} blocks to disk\n`);
+  if (total === 0) {
+    process.stderr.write(
+      '[milo-mcp] WARNING: index is empty — all projects failed to fetch. ' +
+      'Check that GITHUB_TOKEN is valid and has read access to public repos. ' +
+      'Run the check_setup_status tool for a detailed diagnosis.\n',
+    );
+  }
 }
